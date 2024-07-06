@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /redis-topic-example
+
+spring:
+  application:
+    name: redis-topic-example
+  jackson:
+    property-naming-strategy: com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy
+  data:
+    redis:
+      port: 6379
+      host: localhost
+
+redis-topic-example:
+  topic-name: job_queue
