@@ -4,7 +4,7 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
-import com.jonathanfoucher.redistopicexample.services.JobQueuePublisher;
+import com.jonathanfoucher.redistopicexample.services.JobPublisher;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.slf4j.LoggerFactory;
@@ -21,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@SpringJUnitConfig(JobQueuePublisher.class)
-class JobQueuePublisherTest {
+@SpringJUnitConfig(JobPublisher.class)
+class JobPublisherTest {
     @Autowired
-    private JobQueuePublisher jobQueuePublisher;
+    private JobPublisher jobPublisher;
     @MockBean
     private RedisTemplate<String, Object> redisTemplate;
     @MockBean
@@ -37,7 +37,7 @@ class JobQueuePublisherTest {
     @Test
     void publishJobToTheQueue() {
         // GIVEN
-        Logger log = (Logger) LoggerFactory.getLogger(JobQueuePublisher.class);
+        Logger log = (Logger) LoggerFactory.getLogger(JobPublisher.class);
         ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
         listAppender.start();
         log.addAppender(listAppender);
@@ -48,7 +48,7 @@ class JobQueuePublisherTest {
                 .thenReturn(TOPIC_NAME);
 
         // WHEN
-        jobQueuePublisher.publish(job);
+        jobPublisher.publish(job);
 
         // THEN
         ArgumentCaptor<JobDto> capturedJob = ArgumentCaptor.forClass(JobDto.class);

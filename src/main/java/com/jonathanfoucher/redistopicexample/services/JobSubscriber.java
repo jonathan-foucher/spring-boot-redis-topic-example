@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
-public class JobQueueSubscriber implements MessageListener {
+public class JobSubscriber implements MessageListener {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
