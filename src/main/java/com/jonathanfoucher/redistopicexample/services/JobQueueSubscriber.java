@@ -33,7 +33,7 @@ public class JobQueueSubscriber implements MessageListener {
         log.info("starting to process job {}", job);
         try {
             // simulate running job
-            TimeUnit.MINUTES.sleep(1);
+            TimeUnit.SECONDS.sleep(10);
             log.info("successfully processed job {}", job);
         } catch (InterruptedException e) {
             log.error("failed to process job {}", job);
