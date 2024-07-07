@@ -1,7 +1,7 @@
 package com.jonathanfoucher.redistopicexample.configs;
 
 import com.jonathanfoucher.redistopicexample.data.JobDto;
-import com.jonathanfoucher.redistopicexample.services.JobQueueSubscriber;
+import com.jonathanfoucher.redistopicexample.services.JobSubscriber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class RedisConfig {
 
     @Bean
     public MessageListenerAdapter messageListener() {
-        return new MessageListenerAdapter(new JobQueueSubscriber());
+        return new MessageListenerAdapter(new JobSubscriber());
     }
 
     @Bean

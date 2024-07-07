@@ -6,7 +6,7 @@ import ch.qos.logback.core.read.ListAppender;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
-import com.jonathanfoucher.redistopicexample.services.JobQueueSubscriber;
+import com.jonathanfoucher.redistopicexample.services.JobSubscriber;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,10 @@ import java.util.List;
 import static ch.qos.logback.classic.Level.INFO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringJUnitConfig(JobQueueSubscriber.class)
-class JobQueueSubscriberTest {
+@SpringJUnitConfig(JobSubscriber.class)
+class JobSubscriberTest {
     @Autowired
-    private JobQueueSubscriber jobQueueSubscriber;
+    private JobSubscriber jobSubscriber;
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -33,7 +33,7 @@ class JobQueueSubscriberTest {
     @Test
     void onMessageReceived() {
         // GIVEN
-        Logger log = (Logger) LoggerFactory.getLogger(JobQueueSubscriber.class);
+        Logger log = (Logger) LoggerFactory.getLogger(JobSubscriber.class);
         ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
         listAppender.start();
         log.addAppender(listAppender);
@@ -42,7 +42,7 @@ class JobQueueSubscriberTest {
         Message message = initMessage(job);
 
         // WHEN
-        jobQueueSubscriber.onMessage(message, TOPIC_NAME.getBytes(StandardCharsets.UTF_8));
+        jobSubscriber.onMessage(message, TOPIC_NAME.getBytes(StandardCharsets.UTF_8));
 
         // THEN
         List<ILoggingEvent> logs = listAppender.list;

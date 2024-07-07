@@ -3,7 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jonathanfoucher.redistopicexample.controllers.JobController;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
-import com.jonathanfoucher.redistopicexample.services.JobQueuePublisher;
+import com.jonathanfoucher.redistopicexample.services.JobPublisher;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ class JobControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private JobQueuePublisher jobQueuePublisher;
+    private JobPublisher jobPublisher;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -47,7 +47,7 @@ class JobControllerTest {
                 .andExpect(status().isOk());
 
         ArgumentCaptor<JobDto> capturedJob = ArgumentCaptor.forClass(JobDto.class);
-        verify(jobQueuePublisher, times(1))
+        verify(jobPublisher, times(1))
                 .publish(capturedJob.capture());
 
         assertEquals(1, capturedJob.getAllValues().size());
