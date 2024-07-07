@@ -1,10 +1,9 @@
-package services;
+package com.jonathanfoucher.redistopicexample.services;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
-import com.jonathanfoucher.redistopicexample.services.JobPublisher;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.slf4j.LoggerFactory;
