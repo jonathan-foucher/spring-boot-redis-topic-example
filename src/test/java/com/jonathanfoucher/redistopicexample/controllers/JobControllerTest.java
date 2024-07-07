@@ -1,7 +1,6 @@
-package controllers;
+package com.jonathanfoucher.redistopicexample.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jonathanfoucher.redistopicexample.controllers.JobController;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
 import com.jonathanfoucher.redistopicexample.services.JobPublisher;
 import org.junit.jupiter.api.Test;
