@@ -3,8 +3,7 @@ package com.jonathanfoucher.redistopicexample.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class JobSubscriber implements MessageListener {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
