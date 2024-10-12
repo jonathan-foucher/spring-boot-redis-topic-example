@@ -4,6 +4,8 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import com.jonathanfoucher.redistopicexample.data.JobDto;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.slf4j.LoggerFactory;
@@ -29,18 +31,29 @@ class JobPublisherTest {
     @MockBean
     private ChannelTopic channelTopic;
 
+    private static final Logger log = (Logger) LoggerFactory.getLogger(JobPublisher.class);
+    private static final ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+
     private static final String TOPIC_NAME = "job_queue";
     private static final Long JOB_ID = 15L;
     private static final String JOB_NAME = "some job name";
 
+    @BeforeEach
+    void init() {
+        listAppender.list.clear();
+        listAppender.start();
+        log.addAppender(listAppender);
+    }
+
+    @AfterEach
+    void reset() {
+        log.detachAppender(listAppender);
+        listAppender.stop();
+    }
+
     @Test
     void publishJobToTheQueue() {
         // GIVEN
-        Logger log = (Logger) LoggerFactory.getLogger(JobPublisher.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
-        listAppender.start();
-        log.addAppender(listAppender);
-
         JobDto job = initJobDto();
 
         when(channelTopic.getTopic())
