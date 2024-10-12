@@ -1,4 +1,4 @@
-### introduction
+## Introduction
 This project is an example of Redis pub/sub implementation with Spring Boot.
 
 An endpoint allows to post a job in the queue and the subscriber will automatically consume it.
@@ -8,7 +8,7 @@ Note that all the jobs will run in parallel when the message is received by the 
 If you need to wait for the current job to end before launching the next one, Redis Stream might be a better solution and you can check [this project](https://github.com/jonathan-foucher/spring-boot-redis-stream-example).
 
 
-### run the project
+## Run the project
 You will need to launch a Redis instance on your computer before running the project.
 
 You can either install Redis directly on your machine or run it through Docker :
