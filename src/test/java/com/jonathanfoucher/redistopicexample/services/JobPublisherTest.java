@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
@@ -26,9 +26,9 @@ import static org.mockito.Mockito.*;
 class JobPublisherTest {
     @Autowired
     private JobPublisher jobPublisher;
-    @MockBean
+    @MockitoBean
     private RedisTemplate<String, Object> redisTemplate;
-    @MockBean
+    @MockitoBean
     private ChannelTopic channelTopic;
 
     private static final Logger log = (Logger) LoggerFactory.getLogger(JobPublisher.class);
